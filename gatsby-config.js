@@ -14,6 +14,16 @@ module.exports = {
     title: siteTitle,
     description: siteDescription,
     siteUrl: siteUrl,
+    keywords: [
+      "fullstack developer",
+      "react developer",
+      "build a website",
+      "build ecommerce",
+      "freelancer developer",
+      "frontend developer",
+      "develop web app",
+      "developer in spain",
+    ],
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -42,6 +52,12 @@ module.exports = {
         theme_color: colors.lightTheme.primary,
         display: `minimal-ui`,
         icon: siteIcon, // This path is relative to the root of the site.
+        icons: [
+          {
+            src: siteIcon,
+            purpose: "any maskable",
+          },
+        ],
       },
     },
     {
