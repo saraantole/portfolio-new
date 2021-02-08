@@ -36,7 +36,7 @@ const SEO = ({ description, lang, meta, title }) => {
         },
         {
           name: "keywords",
-          content: site.siteMetadata.keywords.join(","),
+          content: site.siteMetadata.keywords,
         },
         {
           property: `og:title`,
