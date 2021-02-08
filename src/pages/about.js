@@ -22,7 +22,7 @@ const StyledSection = styled.section`
   height: auto;
   background: ${({ theme }) => theme.colors.background};
   h1 {
-    font-size: 52px;
+    font-size: 72px;
     font-weight: 600;
     margin-left: 120px;
     padding: 40px;

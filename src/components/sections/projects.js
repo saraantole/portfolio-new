@@ -42,7 +42,7 @@ const StyledContentWrapper = styled(ContentWrapper)`
     justify-content: center;
     padding: 0;
     .section-title {
-      font-size: 52px;
+      font-size: 72px;
       font-weight: 600;
       padding: 40px;
       margin-left: 120px;
@@ -109,17 +109,17 @@ const StyledProject = styled(motion.div)`
 
   .screenshot {
     width: 100vw;
-    height: 400px;
+    height: 500px;
   }
 
   .project-details {
     background-color: ${({ theme }) => theme.colors.card};
     box-shadow: 0 0 2.5rem rgba(0, 0, 0, 0.16);
-    width: 40%;
+    width: 50%;
     padding: 60px 85px 85px 85px;
     position: relative;
     top: -150px;
-    left: 30%;
+    left: 25%;
 
     .features {
       display: flex;

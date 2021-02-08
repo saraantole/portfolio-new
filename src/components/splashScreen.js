@@ -6,7 +6,7 @@ import { motion, useAnimation } from "framer-motion"
 
 import { lightTheme, darkTheme } from "../styles/theme"
 import Context from "../context/"
-import Logo from "./logo"
+
 
 const StyledSplashScreen = styled(motion.div)`
   position: fixed;
@@ -18,8 +18,7 @@ const StyledSplashScreen = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ theme, darkMode }) =>
-    darkMode ? theme.colors.background : theme.colors.primary};
+  background-color: ${lightTheme.colors.primary};
   .logo-wrapper {
     position: relative;
     display: flex;
@@ -35,8 +34,14 @@ const StyledSplashScreen = styled(motion.div)`
     z-index: 1000;
     width: 100%;
     height: 100%;
-    background-color: ${({ theme, darkMode }) =>
-      darkMode ? theme.colors.background : theme.colors.primary};
+    background-color: ${lightTheme.colors.primary};
+  }
+
+  .name {
+    color: ${darkTheme.colors.primary};
+    font-size: 2em;
+    font-weight: 500;
+    letter-spacing: 2px;
   }
 `
 
@@ -60,7 +65,6 @@ const SplashScreen = () => {
     <StyledSplashScreen
       initial={{ opacity: 0 }}
       animate={backgroundControls}
-      darkMode={state.darkMode}
     >
       {/* Add splashScreen class to body (prevents scrolling during splashScreen) */}
       <Helmet
@@ -71,15 +75,9 @@ const SplashScreen = () => {
           className="backdrop"
           initial={{ height: "100%" }}
           animate={backdropControls}
+          transition={{ duration: 2 }}
         />
-        <Logo
-          size="3rem"
-          color={
-            state.darkMode
-              ? darkTheme.colors.primary
-              : lightTheme.colors.background
-          }
-        />
+        <div className='name'>Sara Antole</div>
       </div>
     </StyledSplashScreen>
   )
