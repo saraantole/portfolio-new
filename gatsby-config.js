@@ -52,6 +52,9 @@ module.exports = {
         theme_color: colors.lightTheme.primary,
         display: `minimal-ui`,
         icon: siteIcon, // This path is relative to the root of the site.
+        icon_options: {
+          purpose: `maskable`,
+        },
       },
     },
     {
