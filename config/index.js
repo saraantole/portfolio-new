@@ -57,10 +57,10 @@ module.exports = {
       name: "Linkedin",
       url: "https://www.linkedin.com/in/sara-antole-07a6981b9/",
     },
-    {
-      name: "Medium",
-      url: "https://medium.com/@sara.antole",
-    },
+    //{
+     // name: "Medium",
+     // url: "https://medium.com/@sara.antole",
+    //},
     {
       name: "Github",
       url:
