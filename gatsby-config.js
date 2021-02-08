@@ -54,7 +54,7 @@ module.exports = {
         icon: siteIcon, // This path is relative to the root of the site.
         icons: [
           {
-            src: siteIcon,
+            src: "content/favicon.png",
             purpose: "any maskable",
           },
         ],
