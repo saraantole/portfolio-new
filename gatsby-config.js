@@ -52,12 +52,6 @@ module.exports = {
         theme_color: colors.lightTheme.primary,
         display: `minimal-ui`,
         icon: siteIcon, // This path is relative to the root of the site.
-        icons: [
-          {
-            src: "content/favicon.png",
-            purpose: "any maskable",
-          },
-        ],
       },
     },
     {
