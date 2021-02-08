@@ -1,11 +1,12 @@
+/* eslint-disable prettier/prettier */
 module.exports = {
   //-- SITE SETTINGS -----
-  author: "@konstantinmuenster",
-  siteTitle: "Gatsby Starter Portfolio Minimal",
-  siteShortTitle: "Gatsby", // Used as logo text in header, footer, and splash screen
+  author: "Sara Antole",
+  siteTitle: "Sara Antole | Website",
+  siteShortTitle: "SA", // Used as logo text in header, footer, and splash screen
   siteDescription:
-    "A modern one-page portfolio with a clean yet expressive design.",
-  siteUrl: "https://gatsby-starter-portfolio-minimal.netlify.app/",
+    "Sara Antole, Fullstack Web Developer",
+  siteUrl: "https://saraantole.netlify.app/",
   siteLanguage: "en_US",
   siteIcon: "content/favicon.png", // Relative to gatsby-config file
   seoTitleSuffix: "Portfolio Minimal", // SEO title syntax will be e.g. "Imprint - {seoTitleSuffix}"
@@ -14,11 +15,10 @@ module.exports = {
   colors: {
     lightTheme: {
       primary: "#000000",
-      secondary: "#FFF4D9",
-      tertiary: "#F2F2F2",
-      text: "#000000",
+      tertiary: "#ECECEC",
+      text: "#1F1F1F",
       subtext: "#555555",
-      background: "#FFFFFF",
+      background: "#F8F8F8",
       card: "#FFFFFF",
       scrollBar: "rgba(0, 0, 0, 0.5)",
       boxShadow: "rgba(0, 0, 0, 0.16)",
@@ -26,10 +26,9 @@ module.exports = {
     },
     darkTheme: {
       primary: "#FAFAFA",
-      secondary: "#2A2926",
       tertiary: "#252525",
       text: "rgba(255, 255, 255, 0.87)",
-      subtext: "#AAAAAA",
+      subtext: "#CCCC",
       background: "#121212",
       card: "#1C1C1C",
       scrollBar: "rgba(255, 255, 255, 0.5)",
@@ -38,7 +37,7 @@ module.exports = {
     },
   },
   fonts: {
-    primary: "Roboto, Arial, sans-serif",
+    primary: "Manrope, sans-serif",
   },
 
   //-- ARTICLES SECTION SETTINGS -----
@@ -46,9 +45,9 @@ module.exports = {
   // To access your Medium RSS feed, just replace this url with your username: https://medium.com/feed/@{yourname}
   mediumRssFeed:
     "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40konstantinmuenster",
-  // rssFeed: "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.theguardian.com%2Finternational%2Frss",
+    //rssFeed: "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.theguardian.com%2Finternational%2Frss",
 
-  shownArticles: 3,
+  shownArticles: 6,
 
   //-- SOCIAL MEDIA SETTINGS -----
   // There are icons available for the following platforms:
@@ -56,20 +55,20 @@ module.exports = {
   socialMedia: [
     {
       name: "Linkedin",
-      url: "https://www.linkedin.com/in/konstantin-muenster/",
+      url: "https://www.linkedin.com/in/sara-antole-07a6981b9/",
     },
     {
       name: "Medium",
-      url: "https://konstantinmuenster.medium.com/",
+      url: "https://medium.com/@sara.antole",
     },
     {
       name: "Github",
       url:
-        "https://github.com/konstantinmuenster/gatsby-starter-portfolio-minimal",
+        "https://github.com/saraantole",
     },
     {
-      name: "Behance",
-      url: "https://www.behance.net/konstanmnster",
+      name: "Instagram",
+      url: "https://www.instagram.com/the_unknown_developer/",
     },
   ],
 
@@ -77,31 +76,25 @@ module.exports = {
   navLinks: {
     menu: [
       {
-        name: "Articles",
-        url: "/#articles",
+        name: "Home",
+        url: "/",
       },
       {
-        name: "About Me",
-        url: "/#about",
+        name: "About",
+        url: "/about",
       },
       {
-        name: "Features",
-        url: "/#projects",
+        name: "Projects",
+        url: "/projects",
       },
+      //{
+        //name: "Blog",
+        //url: "/blog",
+      //}
     ],
     button: {
       name: "Contact",
-      url: "/#contact",
+      url: "/contact",
     },
-  },
-  footerLinks: [
-    {
-      name: "Privacy",
-      url: "/privacy",
-    },
-    {
-      name: "Imprint",
-      url: "/imprint",
-    },
-  ],
+  }
 }

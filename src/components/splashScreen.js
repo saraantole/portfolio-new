@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { useEffect, useContext } from "react"
 import styled from "styled-components"
 import Helmet from "react-helmet"

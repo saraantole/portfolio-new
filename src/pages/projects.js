@@ -2,17 +2,16 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { graphql } from "gatsby"
-
+import Projects from '../components/sections/projects'
 import GlobalStateProvider from "../context/provider"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Hero from "../components/sections/hero"
-import Services from "../components/sections/services"
 import ContactButton from "../components/contactButton"
 import { seoTitleSuffix } from "../../config"
 
-const IndexPage = ({ data }) => {
-  const { frontmatter } = data.index.edges[0].node
+
+const ProjectsPage = ({ data }) => {
+  const { frontmatter } = data.projects.edges[0].node
   const { seoTitle, useSeoTitleSuffix, useSplashScreen } = frontmatter
 
   const globalState = {
@@ -33,51 +32,21 @@ const IndexPage = ({ data }) => {
               : `${seoTitle}`
           }
         />
-        <Hero content={data.hero.edges} />
-        <Services content={data.projects.edges} />
-        <ContactButton/>
+        <Projects content={data.projects.edges} />
+        <ContactButton />
       </Layout>
     </GlobalStateProvider>
   )
 }
 
-IndexPage.propTypes = {
+ProjectsPage.propTypes = {
   data: PropTypes.object.isRequired,
 }
 
-export default IndexPage
+export default ProjectsPage
 
 export const pageQuery = graphql`
   {
-    index: allMdx(filter: { fileAbsolutePath: { regex: "/index/index/" } }) {
-      edges {
-        node {
-          frontmatter {
-            seoTitle
-            useSeoTitleSuffix
-            useSplashScreen
-          }
-        }
-      }
-    }
-    hero: allMdx(filter: { fileAbsolutePath: { regex: "/index/hero/" } }) {
-      edges {
-        node {
-          frontmatter {
-            greetings
-            title
-            subtitle
-            image {
-              childImageSharp {
-                fluid(maxWidth: 400, quality: 90) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-          }
-        }
-      }
-    }
     projects: allMdx(
       filter: {
         fileAbsolutePath: { regex: "/projects/" }
@@ -87,9 +56,17 @@ export const pageQuery = graphql`
     ) {
       edges {
         node {
+          body
           frontmatter {
+            title
+            seoTitle
+            useSeoTitleSuffix
+            useSplashScreen
             category
+            features
             id
+            external
+            github
             screenshot {
               childImageSharp {
                 fluid(maxWidth: 1600, quality: 90) {
@@ -97,6 +74,10 @@ export const pageQuery = graphql`
                 }
               }
             }
+            position
+            buttonVisible
+            buttonUrl
+            buttonText
           }
         }
       }

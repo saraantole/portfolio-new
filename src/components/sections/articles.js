@@ -5,10 +5,9 @@ import { motion, useAnimation } from "framer-motion"
 
 import Context from "../../context"
 import ContentWrapper from "../../styles/contentWrapper"
-import Underlining from "../../styles/underlining"
 import { parseDate } from "../../utils"
 import { mediumRssFeed, shownArticles } from "../../../config"
-// import { rssFeed, shownArticles } from "../../../config"
+//import { rssFeed, shownArticles } from "../../../config"
 import { lightTheme, darkTheme } from "../../styles/theme"
 
 const StyledSection = motion.custom(styled.section`
@@ -21,26 +20,25 @@ const StyledContentWrapper = styled(ContentWrapper)`
   && {
     width: 100%;
     height: 100%;
-    padding-right: 0;
-    padding-left: 0;
-    @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-      padding-right: 2.5rem;
-      padding-left: 2.5rem;
-    }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 40px;
+
     .section-title {
-      padding-right: 2.5rem;
-      padding-left: 2.5rem;
-      @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-        padding-right: 0;
-        padding-left: 0;
+      font-size: 64px;
+      font-weight: 600;
+      margin-bottom: 60px;
+      @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+        font-size: 42px;
+        line-height: 45px;
       }
     }
     .articles {
       display: flex;
-      justify-content: flex-start;
-      overflow-x: scroll;
-      overflow-y: hidden;
-      -webkit-overflow-scrolling: touch;
+      justify-content: center;
+      flex-wrap: wrap;
       margin: -2rem 0 0 0;
       padding: 0 2rem;
       &::-webkit-scrollbar {
@@ -48,29 +46,6 @@ const StyledContentWrapper = styled(ContentWrapper)`
       }
       @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
         padding: 0 1rem;
-      }
-      /* Show scrollbar if desktop and wrapper width > viewport width */
-      @media (hover: hover) {
-        scrollbar-color: ${({ theme }) => theme.colors.scrollBar} transparent; // Firefox only
-        &::-webkit-scrollbar {
-          display: block;
-          -webkit-appearance: none;
-        }
-
-        &::-webkit-scrollbar:horizontal {
-          height: 0.8rem;
-        }
-
-        &::-webkit-scrollbar-thumb {
-          border-radius: 8px;
-          border: 0.2rem solid ${({ theme }) => theme.colors.background};
-          background-color: ${({ theme }) => theme.colors.scrollBar};
-        }
-
-        &::-webkit-scrollbar-track {
-          background-color: ${({ theme }) => theme.colors.background};
-          border-radius: 8px;
-        }
       }
     }
     .card {
@@ -80,19 +55,18 @@ const StyledContentWrapper = styled(ContentWrapper)`
       flex-direction: column;
       justify-content: center;
       padding: 1rem;
-      margin: 2rem 1rem;
+      margin: 30px;
       box-shadow: 0 5px 15px ${({ theme }) => theme.colors.boxShadow};
-      border-radius: ${({ theme }) => theme.borderRadius};
+      border-radius: 10px;
       background: ${({ theme }) => theme.colors.card};
       transition: box-shadow 0.3s ease-out;
       &:hover {
         box-shadow: 0 5px 15px ${({ theme }) => theme.colors.boxShadowHover};
-      }
-      &:hover ${Underlining} {
-        box-shadow: inset 0 -1rem 0 ${({ theme }) => theme.colors.secondary};
+        transform: scale(1.01);
+        transition: 0.3s ease-in-out;
       }
       @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-        margin: 2rem 2.5rem 2rem 0;
+        margin: 50px 32px 0 0;
       }
       .category {
         color: ${({ theme }) => theme.colors.primary};
@@ -131,13 +105,15 @@ const Articles = () => {
         })
         fetch(mediumRssFeed, { headers: { Accept: "application/json" } })
           // fetch(rssFeed, { headers: { Accept: "application/json" } })
-          .then(res => res.json())
+          .then((res) => res.json())
           // Feed also contains comments, therefore we filter for articles only
-          .then(data => data.items.filter(item => item.categories.length > 0))
+          .then((data) =>
+            data.items.filter((item) => item.categories.length > 0)
+          )
           // .then(data => data.items.filter(item => item.title.length > 0))
-          .then(newArticles => newArticles.slice(0, MAX_ARTICLES))
-          .then(articles => setArticles(articles))
-          .catch(error => console.log(error))
+          .then((newArticles) => newArticles.slice(0, MAX_ARTICLES))
+          .then((articles) => setArticles(articles))
+          .catch((error) => console.log(error))
       }
     }
     loadArticles()
@@ -150,10 +126,10 @@ const Articles = () => {
       animate={articlesControls}
     >
       <StyledContentWrapper>
-        <h3 className="section-title">Latest Articles</h3>
+        <h3 className="section-title">You can read my mind</h3>
         <div className="articles">
           {articles
-            ? articles.map(item => (
+            ? articles.map((item) => (
                 <a
                   href={item.link}
                   target="_blank"
@@ -164,16 +140,16 @@ const Articles = () => {
                 >
                   <div className="card">
                     <span className="category">
-                      <Underlining color="tertiary" hoverColor="secondary">
+                      <div color="tertiary" hoverColor="secondary">
                         {item.categories[2]}
-                      </Underlining>
+                      </div>
                     </span>
                     <h4 className="title">{item.title}</h4>
                     <span className="date">{parseDate(item.pubDate)}</span>
                   </div>
                 </a>
               ))
-            : [...Array(MAX_ARTICLES <= 3 ? MAX_ARTICLES : 3)].map((i, key) => (
+            : [...Array(MAX_ARTICLES <= 6 ? MAX_ARTICLES : 6)].map((i, key) => (
                 <div className="card" key={key}>
                   <SkeletonLoader
                     height="1.5rem"

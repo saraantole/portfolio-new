@@ -8,17 +8,17 @@ const StyledNav = styled.nav`
   display: none;
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
-    width: 31.25rem;
+    width: 45%;
     background: ${({ theme }) => theme.colors.background};
     a {
       color: ${({ theme }) => theme.colors.primary};
     }
   }
   .nav-link {
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: 24px;
+    font-weight: 400;
     text-align: center;
     position: relative;
     margin: 0 0 0 1.25rem;
@@ -39,12 +39,12 @@ const StyledNav = styled.nav`
   .cta-btn {
     width: auto;
     height: auto;
-    font-weight: 700;
-    border-radius: ${({ theme }) => theme.borderRadius};
+    font-weight: 400;
+    border-radius: 10px;
     border: 0.125rem solid ${({ theme }) => theme.colors.primary};
     background: ${({ theme }) => theme.colors.background};
     transition: 20ms ease-out;
-    font-size: 1rem;
+    font-size: 24px;
     padding: 0.5rem 1.5rem;
     margin: 0;
     &:hover {
@@ -54,15 +54,36 @@ const StyledNav = styled.nav`
   }
 `
 
+export const StyledLink = styled(Link)`
+  font-size: 24px;
+  font-weight: 400;
+  text-align: center;
+  position: relative;
+  margin: 0 0 0 1.25rem;
+  padding: 0;
+  &::before {
+    transition: 200ms ease-out;
+    height: 0.1563rem;
+    content: "";
+    position: absolute;
+    background-color: ${({ theme }) => theme.colors.primary};
+    width: 0%;
+    bottom: -0.125rem;
+  }
+  &:hover::before {
+    width: 100%;
+  }
+`
+
 const Navbar = () => {
   const { menu, button } = navLinks
   return (
     <StyledNav>
       {menu.map(({ name, url }, key) => {
         return (
-          <Link className="nav-link" key={key} to={url}>
+          <StyledLink key={key} to={url}>
             {name}
-          </Link>
+          </StyledLink>
         )
       })}
       <Link className="cta-btn" to={button.url}>

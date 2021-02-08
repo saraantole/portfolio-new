@@ -1,13 +1,13 @@
+/* eslint-disable prettier/prettier */
 import React from "react"
 import PropTypes from "prop-types"
 import styled, { ThemeProvider } from "styled-components"
-import "fontsource-roboto/400.css"
-import "fontsource-roboto/700.css"
-
+import "@fontsource/manrope"
 import { lightTheme, darkTheme } from "../styles/theme"
-import { useDarkMode } from "../hooks"
+import useDarkMode from "../hooks/useDarkMode"
 import GlobalStyle from "../styles/globalStyle"
 import Header from "./header"
+import DarkToggle from "./darkToggle"
 import Footer from "./footer"
 
 // https://medium.com/@chrisfitkin/how-to-smooth-scroll-links-in-gatsby-3dc445299558
@@ -19,25 +19,27 @@ const StyledLayoutWrapper = styled.div`
   width: 100%;
   min-height: 100vh;
   margin: 0 auto;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  grid-template-columns: 100%;
 `
 
 const Layout = ({ children }) => {
   // Enables dark mode if the user's OS has an active dark theme
-  const darkModeEnabled = useDarkMode()
-  const theme = darkModeEnabled ? darkTheme : lightTheme
+  const [theme, toggleTheme, componentMounted] = useDarkMode()
+  const themeMode = theme === 'light' ? lightTheme : darkTheme;
+
+  if (!componentMounted) {
+    return <div />
+  }
 
   return (
-    <StyledLayoutWrapper>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <Header />
-        <main id="main-content">{children}</main>
-        <Footer />
-      </ThemeProvider>
-    </StyledLayoutWrapper>
+      <StyledLayoutWrapper>
+        <ThemeProvider theme={themeMode}>
+          <GlobalStyle />
+          <Header />
+          <DarkToggle toggleTheme={toggleTheme} theme={theme} />
+          <main id="main-content">{children}</main>
+          <Footer />
+        </ThemeProvider>
+      </StyledLayoutWrapper>
   )
 }
 

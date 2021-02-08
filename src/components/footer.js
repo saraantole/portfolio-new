@@ -1,21 +1,17 @@
 import React, { useContext } from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
-
 import ContentWrapper from "../styles/contentWrapper"
 import Context from "../context"
-import Logo from "./logo"
-import { lightTheme, darkTheme } from "../styles/theme"
-import { footerLinks } from "../../config"
+import { author } from "../../config"
+import Social from "./social"
 
 const StyledFooter = styled.footer`
   width: 100%;
-  height: ${({ theme }) => theme.footerHeight};
   background: ${({ theme, darkMode }) =>
-    darkMode ? theme.colors.background : theme.colors.primary};
+    darkMode ? theme.colors.primary : theme.colors.background};
   border-top: ${({ theme, darkMode }) =>
-    darkMode ? `3px solid ${theme.colors.boxShadowHover}` : null};
-  margin-top: 10rem;
+    darkMode ? null : `1px solid ${theme.colors.tertiary}`};
 `
 
 const StyledContentWrapper = styled(ContentWrapper)`
@@ -23,27 +19,32 @@ const StyledContentWrapper = styled(ContentWrapper)`
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     .footer-links {
-      /* Adjust width of links wrapper accordingly */
-      width: 10rem;
       display: flex;
-      justify-content: space-between;
-      @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
-        width: 15rem;
+      padding-bottom: 20px;
+      @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+        width: auto;
+        padding: 20px 40px 0 40px;
+      }
+
+      a,
+      p {
+        font-size: 0.875rem;
+        font-weight: 700;
+        color: ${({ theme, darkMode }) =>
+          darkMode ? theme.colors.background : theme.colors.primary};
+        letter-spacing: 2px;
+        margin: 0;
+        padding-left: 5px;
+        @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+          font-size: 9px;
+        }
       }
     }
   }
-`
-
-const StyledLink = styled(Link)`
-  font-size: 0.875rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: ${({ theme, $darkMode }) =>
-    $darkMode ? theme.colors.primary : theme.colors.background};
-  letter-spacing: 1px;
 `
 
 const Footer = () => {
@@ -51,20 +52,15 @@ const Footer = () => {
   return (
     <StyledFooter darkMode={darkMode}>
       <StyledContentWrapper>
-        <Link to="/" aria-label="home">
-          <Logo
-            size="1.5rem"
-            color={
-              darkMode ? darkTheme.colors.primary : lightTheme.colors.background
-            }
-          />
-        </Link>
-        <div className="footer-links" data-testid="footer-links">
-          {footerLinks.map(({ name, url }, key) => (
-            <StyledLink key={key} to={url} $darkMode={darkMode}>
-              {name}
-            </StyledLink>
-          ))}
+        <Social width="9rem" padding="0.5rem 1.25rem" />
+        <div className="footer-links">
+          <p>
+            Crafted by <span>{author}</span>
+          </p>
+          <p> | © {new Date().getFullYear()}</p>
+          <Link to="/privacy" darkMode={darkMode}>
+            | Privacy
+          </Link>
         </div>
       </StyledContentWrapper>
     </StyledFooter>

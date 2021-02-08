@@ -1,35 +1,34 @@
-import { useEffect, useContext } from "react"
-
-import Context from "../context"
+import { useEffect, useState } from "react"
 
 const useDarkMode = () => {
-  const { state, setState } = useContext(Context)
+  const [theme, setTheme] = useState("light")
+  const [componentMounted, setComponentMounted] = useState(false)
+  const setMode = (mode) => {
+    window.localStorage.setItem("theme", mode)
+    setTheme(mode)
+  }
+
+  const toggleTheme = () => {
+    if (theme === "light") {
+      setMode("dark")
+    } else {
+      setMode("light")
+    }
+  }
 
   useEffect(() => {
-    const darkScheme = "(prefers-color-scheme: dark)"
-
-    const toggleTheme = event => {
-      if (event.matches) {
-        setState({ ...state, darkMode: true })
-      } else {
-        setState({ ...state, darkMode: false })
-      }
-    }
-
-    if (window.matchMedia && window.matchMedia(darkScheme).matches) {
-      setState({ ...state, darkMode: true })
-    }
-
-    window.matchMedia(darkScheme).addEventListener("change", toggleTheme)
-
-    return () => {
-      window.matchMedia(darkScheme).removeEventListener("change", toggleTheme)
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const localTheme = window.localStorage.getItem("theme")
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches &&
+    !localTheme
+      ? setMode("dark")
+      : localTheme
+      ? setTheme(localTheme)
+      : setMode("light")
+    setComponentMounted(true)
   }, [])
 
-  return state.darkMode
+  return [theme, toggleTheme, componentMounted]
 }
 
 export default useDarkMode

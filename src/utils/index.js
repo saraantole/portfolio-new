@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { sharedPreferences } from "../styles/theme"
 
 // breakpoints.lg needs to be cleaned and parsed since it is a string like '1200px'

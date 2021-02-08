@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react"
 import { Link } from "gatsby"
-import Helmet from "react-helmet"
 import styled from "styled-components"
 import { motion, useAnimation } from "framer-motion"
 
@@ -15,6 +14,7 @@ const StyledHeader = motion.custom(styled.header`
   width: 100%;
   height: ${({ theme }) => theme.headerHeight};
   background: ${({ theme }) => theme.colors.background};
+  z-index: 10;
 `)
 
 const StyledContentWrapper = styled(ContentWrapper)`
@@ -29,7 +29,7 @@ const StyledContentWrapper = styled(ContentWrapper)`
 
 // https://css-tricks.com/hamburger-menu-with-a-side-of-react-hooks-and-styled-components/
 const StyledBurger = styled.button`
-  z-index: 12;
+  z-index: 11;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -50,9 +50,10 @@ const StyledBurger = styled.button`
 
   div {
     width: 2rem;
+    z-index: 11;
     height: 0.25rem;
     background: ${({ theme }) => theme.colors.primary};
-    border-radius: 0.625rem;
+    border-radius: 50px;
     transition: all 0.3s ease-in-out;
     position: relative;
     transform-origin: 1px;
@@ -64,6 +65,8 @@ const StyledBurger = styled.button`
     :nth-child(2) {
       opacity: ${({ open }) => (open ? "0" : "1")};
       transform: ${({ open }) => (open ? "translateX(20px)" : "translateX(0)")};
+      width: 1.5rem;
+      margin-left: 0.5rem;
     }
 
     :nth-child(3) {
@@ -100,7 +103,7 @@ const Header = () => {
   let navigation
   if (detectMobileAndTablet(windowWidth)) {
     navigation = (
-      <>
+      <div>
         <StyledBurger
           aria-controls="sidebar"
           open={open}
@@ -111,7 +114,7 @@ const Header = () => {
           <div />
         </StyledBurger>
         <Sidebar id="sidebar" open={open} setOpen={setOpen} />
-      </>
+      </div>
     )
   } else {
     navigation = <Navbar />
@@ -119,8 +122,6 @@ const Header = () => {
 
   return (
     <StyledHeader initial={{ opacity: 0, y: -10 }} animate={controls}>
-      {/* add blur class to body when sidebar is opened */}
-      <Helmet bodyAttributes={{ class: open ? "blur" : "" }} />
       <StyledContentWrapper>
         <Link to="/" aria-label="home">
           <Logo color="primary" size="2rem" />

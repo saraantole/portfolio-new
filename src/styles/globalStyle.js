@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { createGlobalStyle } from "styled-components"
 import modernNormalize from "styled-modern-normalize"
 
@@ -12,14 +13,13 @@ const GlobalStyle = createGlobalStyle`
 
     html {
         width: 100%;
-        height: 100%;
     }
 
     body {
         width: 100%;
-        height: 100%;
         margin: 0;
         padding: 0;
+        overflow-x: hidden;
         background-color: ${({ theme }) => theme.colors.background};
         color: ${({ theme }) => theme.colors.text};
         font-size: 1rem;
@@ -55,7 +55,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     h1 {
-        font-weight: 700;
+        font-weight: 500;
         font-size: 2rem;
         line-height: 2.375rem;
         color: ${({ theme }) => theme.colors.primary};
@@ -66,7 +66,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     h2 {
-        font-weight: 700;
+        font-weight: 500;
         font-size: 1.25rem;
         line-height: 1.5rem;
         color: ${({ theme }) => theme.colors.primary};
@@ -77,7 +77,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     h3 {
-        font-weight: 700;
+        font-weight: 500;
         font-size: 1.75rem;
         line-height: 2.25rem;
         color: ${({ theme }) => theme.colors.primary};
@@ -96,6 +96,23 @@ const GlobalStyle = createGlobalStyle`
         color: ${({ theme }) => theme.colors.tertiary};
         opacity: 0.1;
       }
+
+      ::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+       }
+       ::-webkit-scrollbar-thumb {
+        background: #000000;
+        border-radius: 15px;
+       }
+       ::-webkit-scrollbar-thumb:hover{
+        background: grey;
+       }
+       ::-webkit-scrollbar-track{
+        background: #ffffff;
+        border-radius: 15px;
+        box-shadow: inset 7px 10px 12px #f0f0f0;
+       }
 
 `
 

@@ -6,10 +6,10 @@ import { siteShortTitle } from "../../config"
 
 const StyledLogo = styled.div`
   position: relative;
-  z-index: 13;
+  z-index: 9;
 
-  font-size: ${({ size }) => (size ? size : "1.75rem")};
-  font-weight: 900;
+  font-size: ${({ size }) => (size ? size : "18px")};
+  font-weight: 700;
   color: ${({ theme, color }) => theme.colors[color] || color};
 
   /* Disable effects when sidebar is open */

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 const { colors, fonts } = require("../../config")
 
 export const sharedPreferences = {
@@ -8,10 +9,10 @@ export const sharedPreferences = {
     md: "992px",
     lg: "1200px",
   },
-  borderRadius: "1rem",
-  pageWidth: "62.5rem",
-  headerHeight: "6.25rem",
-  footerHeight: "7.5rem",
+  borderRadius: "0",
+  pageWidth: "100%",
+  headerHeight: "100px",
+  footerHeight: "100px",
 }
 
 export const lightTheme = {

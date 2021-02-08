@@ -44,7 +44,7 @@ const StyledNav = styled.nav`
   justify-content: center;
   background: ${({ theme }) => theme.colors.background};
   height: 100vh;
-  width: 55%;
+  width: 100%;
   text-align: left;
   padding: 2rem;
   position: relative;
@@ -54,7 +54,7 @@ const StyledNav = styled.nav`
     color: ${({ theme }) => theme.colors.primary};
   }
   .nav-link {
-    font-size: 1.5rem;
+    font-size: 24px;
     font-weight: 700;
     text-align: center;
     padding: 1.5rem 0;
@@ -65,8 +65,8 @@ const StyledNav = styled.nav`
     margin: 1.5rem auto;
     padding: 1rem 1.5rem;
     font-weight: 700;
-    font-size: 1.5rem;
-    border-radius: ${({ theme }) => theme.borderRadius};
+    font-size: 24px;
+    border-radius: 10px;
     border: 0.125rem solid ${({ theme }) => theme.colors.primary};
     background: ${({ theme }) => theme.colors.background};
   }
@@ -75,7 +75,7 @@ const StyledNav = styled.nav`
 const Sidebar = ({ open, setOpen }) => {
   const { menu, button } = navLinks
   return (
-    <>
+    <div>
       <StyledContainer open={open} aria-hidden={!open} tabIndex={open ? 1 : -1}>
         <StyledNav>
           {menu.map(({ name, url }, key) => (
@@ -98,7 +98,7 @@ const Sidebar = ({ open, setOpen }) => {
         </StyledNav>
       </StyledContainer>
       <StyledBackdrop open={open} />
-    </>
+    </div>
   )
 }
 

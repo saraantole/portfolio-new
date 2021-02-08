@@ -1,15 +1,11 @@
-import React, { useState, useEffect, useRef, useContext } from "react"
+import React, { useContext } from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import Img from "gatsby-image"
-import VisibilitySensor from "react-visibility-sensor"
-import { motion } from "framer-motion"
-
-import { useOnScreen } from "../../hooks"
+import { motion, useViewportScroll, useTransform } from "framer-motion"
 import Context from "../../context"
 import ContentWrapper from "../../styles/contentWrapper"
-import Underlining from "../../styles/underlining"
 import Button from "../../styles/button"
 import Icon from "../../components/icons"
 import { lightTheme, darkTheme } from "../../styles/theme"
@@ -18,11 +14,18 @@ const StyledSection = styled.section`
   width: 100%;
   height: auto;
   background: ${({ theme }) => theme.colors.background};
-  margin-top: 6rem;
+
+  p {
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 30px;
+    letter-spacing: 1px;
+  }
+
   .cta-btn {
     display: block;
     text-align: center;
-    margin: 2rem auto;
+    margin-top: -100px;
     @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
       margin: 0 auto;
     }
@@ -37,164 +40,118 @@ const StyledContentWrapper = styled(ContentWrapper)`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-right: 0;
-    padding-left: 0;
-    @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-      padding-right: 2.5rem;
-      padding-left: 2.5rem;
-    }
+    padding: 0;
     .section-title {
-      padding-right: 2.5rem;
-      padding-left: 2.5rem;
-      @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-        padding-right: 0;
-        padding-left: 0;
-      }
+      font-size: 52px;
+      font-weight: 600;
+      padding: 40px;
+      margin-left: 120px;
     }
     .projects {
       display: flex;
-      flex-direction: row;
-      margin-top: -2.5rem;
-      padding: 2.5rem 2.5rem;
-      overflow-x: scroll;
-      overflow-y: hidden;
-      -webkit-overflow-scrolling: touch;
-      &::-webkit-scrollbar {
-        display: none;
-      }
-      @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-        flex-direction: column;
-        margin-top: 0;
-        padding: 0;
-        overflow: visible;
-      }
-      /* Show scrollbar if desktop and wrapper width > viewport width */
-      @media (hover: hover) {
-        scrollbar-color: ${({ theme }) => theme.colors.scrollBar} transparent; // Firefox only
-        &::-webkit-scrollbar {
-          display: block;
-          -webkit-appearance: none;
-        }
-
-        &::-webkit-scrollbar:horizontal {
-          height: 0.8rem;
-        }
-
-        &::-webkit-scrollbar-thumb {
-          border-radius: 8px;
-          border: 0.2rem solid ${({ theme }) => theme.colors.background};
-          background-color: ${({ theme }) => theme.colors.scrollBar};
-        }
-
-        &::-webkit-scrollbar-track {
-          background-color: ${({ theme }) => theme.colors.background};
-          border-radius: 8px;
-        }
-      }
+      height: auto;
+      flex-direction: column;
+      overflow-x: hidden;
     }
-    .counter {
-      position: absolute;
-      top: 2.2rem;
-      right: 2.5rem;
-      font-size: 1.125rem;
-      font-weight: 500;
-      @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
-        display: none;
+    @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+      .section-title {
+        font-size: 24px;
+        line-height: 30px;
+        margin: 0;
       }
     }
   }
 `
 
 const StyledProject = styled(motion.div)`
+  width: 100%;
+  height: auto;
   display: flex;
-  flex-direction: column-reverse;
-  justify-content: flex-end;
-  align-items: center;
-  margin-top: 0;
-  margin-bottom: 2rem;
-  flex-shrink: 0;
-  padding-right: 2.5rem;
-  max-width: 20rem;
-  @media (min-width: ${({ theme }) => theme.breakpoints.xs}) {
-    max-width: 25rem;
-    margin-top: 2rem;
-    padding-right: 5rem;
+  flex-direction: column;
+
+  .category {
+    padding-left: 40px;
+    font-size: 24px;
+    line-height: 80px;
+    text-transform: uppercase;
+    letter-spacing: +1px;
+    margin-bottom: 20px;
+    font-weight: 700;
+    padding: 0 40px;
   }
-  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    justify-content: space-between;
-    flex-shrink: 1;
-    max-width: 62.5rem;
-    margin-bottom: 10rem;
-    padding-right: 0;
-    /* Positioning of image and details should vary */
-    flex-direction: ${({ position }) =>
-      position % 2 !== 0 ? "row" : "row-reverse"};
+  .title {
+    margin-top: 0.625rem;
+    font-size: 42px;
+    line-height: 48px;
+    font-weight: 400;
+    padding: 0 40px;
   }
-  .details {
-    width: 100%;
-    max-width: 25rem;
+  .links {
     display: flex;
-    flex-direction: column;
-    margin-top: 3rem;
-    @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-      margin-top: 0;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    margin-top: 1rem;
+    a {
+      display: inline-block;
+      margin-left: 2rem;
     }
-    .category {
-      font-size: 0.875rem;
-      line-height: 1rem;
-      text-transform: uppercase;
-      letter-spacing: +1px;
+    svg {
+      width: 1.3rem;
+      height: 1.3rem;
+      fill: ${({ theme }) => theme.colors.primary};
     }
-    .title {
-      margin-top: 0.625rem;
-      margin-bottom: 0.625rem;
-      font-size: 1.375rem;
-      line-height: 1.625rem;
-      font-weight: 700;
+    svg:hover {
+      transform: scale(1.1);
+      transition: 0.3s ease-in-out;
     }
-    .tags {
+  }
+
+  .screenshot {
+    width: 100vw;
+    height: 400px;
+  }
+
+  .project-details {
+    background-color: ${({ theme }) => theme.colors.card};
+    box-shadow: 0 0 2.5rem rgba(0, 0, 0, 0.16);
+    width: 40%;
+    padding: 60px 85px 85px 85px;
+    position: relative;
+    top: -150px;
+    left: 30%;
+
+    .features {
       display: flex;
       flex-wrap: wrap;
-      margin-top: 1.5rem;
-      line-height: 1.2rem;
-      span {
-        margin-right: 1rem;
-        margin-bottom: 1rem;
-      }
-    }
-    .links {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
       width: 100%;
-      margin-top: 1rem;
-      a {
-        display: inline-block;
-        margin-right: 2rem;
-      }
-      svg {
-        width: 1.3rem;
-        height: 1.3rem;
-        transition: all 0.3s ease-out;
-      }
-      svg:hover {
-        fill: ${({ theme }) => theme.colors.primary};
+
+      .feature {
+        border: 2px ${({ theme }) => theme.colors.primary} solid;
+        border-radius: 10px;
+        padding: 5px 15px;
+        margin-right: 10px;
+        margin-top: 20px;
+        font-weight: 600;
       }
     }
   }
-  .screenshot {
-    width: 100%;
-    max-width: 25rem;
-    height: 15rem;
-    border-radius: ${({ theme }) => theme.borderRadius};
-    box-shadow: 0 0 2.5rem rgba(0, 0, 0, 0.16);
-    transition: all 0.3s ease-out;
-    &:hover {
-      transform: translate3d(0px, -0.125rem, 0px);
-      box-shadow: 0 0 2.5rem rgba(0, 0, 0, 0.32);
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    .project-details {
+      width: 80%;
+      left: 10%;
+      padding: 30px 45px 45px 45px;
     }
-    @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-      height: 18.75rem;
+
+    .title {
+      font-size: 28px;
+      line-height: 30px;
+    }
+
+    .category {
+      font-size: 22px;
+      line-height: 40px;
     }
   }
 `
@@ -204,100 +161,29 @@ const Projects = ({ content }) => {
   const sectionDetails = content[0].node
   const projects = content.slice(1, content.length)
 
-  // visibleProject is needed to show which project is currently
-  // being viewed in the horizontal slider on mobile and tablet
-  const [visibleProject, setVisibleProject] = useState(1)
-
-  // projects don't track the visibility by using the onScreen hook
-  // instead they use react-visibility-sensor, therefore their visibility
-  // is also stored differently
-  const [onScreen, setOnScreen] = useState({})
-  const handleOnScreen = el => {
-    if (!onScreen[el]) {
-      const updatedOnScreen = { ...onScreen }
-      updatedOnScreen[el] = true
-      setOnScreen(updatedOnScreen)
-    }
-  }
-  const pVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  }
-
-  useEffect(() => {
-    // mobile and tablet only: set first project as visible in the
-    // horizontal slider
-    setVisibleProject(1)
-    // required for animations: set visibility for all projects to
-    // "false" initially
-    let initial = {}
-    projects.forEach(project => {
-      initial[project.node.frontmatter.position] = false
-    })
-    setOnScreen(initial)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  // Required for animating the title
-  const tRef = useRef()
-  const tOnScreen = useOnScreen(tRef)
-  const tVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 },
-  }
-
-  // Required for animating the button
-  const bRef = useRef()
-  const bOnScreen = useOnScreen(bRef)
-  const bVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 },
-  }
+  const { scrollYProgress } = useViewportScroll()
+  const moveRight = useTransform(scrollYProgress, [0, 1], [0, 1000])
 
   return (
     <StyledSection id="projects">
       <StyledContentWrapper>
-        <motion.div
-          ref={tRef}
-          variants={tVariants}
-          animate={tOnScreen ? "visible" : "hidden"}
-        >
-          <h3 className="section-title">{sectionDetails.frontmatter.title}</h3>
-          <div className="counter">
-            {visibleProject} / {projects.length}
-          </div>
+        <motion.div style={{ x: moveRight }}>
+          <h3 className="section-title">Look what I have built recently</h3>
         </motion.div>
         <div className="projects">
-          {projects.map(project => {
+          {projects.map((project) => {
             const { body, frontmatter } = project.node
             return (
-              <VisibilitySensor
-                key={frontmatter.position}
-                onChange={() => handleOnScreen(frontmatter.position)}
-                partialVisibility={true}
-                minTopValue={100}
-              >
-                <StyledProject
-                  position={frontmatter.position}
-                  variants={pVariants}
-                  animate={
-                    onScreen[frontmatter.position] ? "visible" : "hidden"
-                  }
-                >
-                  <div className="details">
-                    <div className="category">
-                      {frontmatter.emoji} {frontmatter.category}
-                    </div>
-                    <div className="title">{frontmatter.title}</div>
-                    <MDXRenderer>{body}</MDXRenderer>
-                    <div className="tags">
-                      {frontmatter.tags.map(tag => (
-                        <Underlining key={tag} highlight>
-                          {tag}
-                        </Underlining>
-                      ))}
-                    </div>
-                    <div className="links">
+              <StyledProject key={frontmatter.id}>
+                <div className="details">
+                  <div className="title">{frontmatter.title}</div>
+                  <div className="category">{frontmatter.category}</div>
+                  <Img
+                    className="screenshot"
+                    fluid={frontmatter.screenshot.childImageSharp.fluid}
+                  />
+                  <div className="project-details">
+                  <div className="links">
                       {frontmatter.github && (
                         <a
                           href={frontmatter.github}
@@ -333,27 +219,25 @@ const Projects = ({ content }) => {
                         </a>
                       )}
                     </div>
+                    <MDXRenderer>{body}</MDXRenderer>
+                    <div className="features">
+                      {frontmatter.features.map((feature, i) => {
+                        return (
+                          <div className="feature" key={i}>
+                            {feature}
+                          </div>
+                        )
+                      })}
+                    </div>
                   </div>
-                  {/* If image in viewport changes, update state accordingly */}
-                  <VisibilitySensor
-                    onChange={() => setVisibleProject(frontmatter.position)}
-                  >
-                    <Img
-                      className="screenshot"
-                      fluid={frontmatter.screenshot.childImageSharp.fluid}
-                    />
-                  </VisibilitySensor>
-                </StyledProject>
-              </VisibilitySensor>
+                </div>
+              </StyledProject>
             )
           })}
         </div>
       </StyledContentWrapper>
       {sectionDetails.frontmatter.buttonVisible && (
         <motion.a
-          ref={bRef}
-          variants={bVariants}
-          animate={bOnScreen ? "visible" : "hidden"}
           className="cta-btn"
           href={sectionDetails.frontmatter.buttonUrl}
           target="_blank"

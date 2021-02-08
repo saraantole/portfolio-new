@@ -1,9 +1,10 @@
+/* eslint-disable prettier/prettier */
 import React from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
 
 const StyledButton = styled.button`
-  width: 15.625rem;
+  width: auto;
   height: 3rem;
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.background};
@@ -13,9 +14,18 @@ const StyledButton = styled.button`
   font-weight: 700;
   text-transform: uppercase;
   border: none;
-  border-radius: ${({ theme }) => theme.borderRadius};
+
+  text-align: center;
+    letter-spacing: 3px;
+    transition: 0.3s ease;
+
+    :hover {
+      transform: scale(1.03);
+      transition: 0.3s ease;
+    }
+  
+  border-radius: 10px;
   text-decoration: none;
-  text-align: ${({ textAlign }) => (textAlign ? textAlign : "left")};
   &:hover,
   &:focus,
   &:active {
