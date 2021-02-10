@@ -83,7 +83,7 @@ const StyledContentWrapper = styled(ContentWrapper)`
     box-shadow: 0 0 2.5rem rgba(0, 0, 0, 0.16);
 
     img {
-        filter: grayscale(40%) contrast(0.9) brightness(90%);
+      filter: grayscale(40%) contrast(0.9) brightness(100%);
       }
   }
 

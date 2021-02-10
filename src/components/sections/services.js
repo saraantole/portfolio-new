@@ -52,6 +52,7 @@ const StyledServices = styled(motion.div)`
   :hover .screenshot {
     transform: scale(0.95);
     transition: 0.4s ease;
+    filter: blur(4px) brightness(120%) contrast(0.5);
   }
 
   :hover .category {
@@ -68,7 +69,7 @@ const StyledServices = styled(motion.div)`
     box-shadow: 0 0 2.5rem rgba(0, 0, 0, 0.16);
 
     img {
-      filter: grayscale(80%) contrast(0.9) brightness(90%);
+      filter: grayscale(20%) contrast(0.9) brightness(100%);
     }
   }
 
@@ -77,7 +78,7 @@ const StyledServices = styled(motion.div)`
     padding-left: 40px;
     font-size: 74px;
     line-height: 80px;
-    letter-spacing: +1px;
+    letter-spacing: 4px;
     margin-bottom: 20px;
     font-weight: 700;
     padding: 0 40px;
@@ -92,6 +93,7 @@ const StyledServices = styled(motion.div)`
 
     :hover .screenshot {
       transform: scale(1);
+      filter: grayscale(20%) contrast(0.9) brightness(100%);
     }
 
     :hover .category {
@@ -114,6 +116,7 @@ const StyledServices = styled(motion.div)`
       width: 100%;
       font-size: 24px;
       line-height: 40px;
+      letter-spacing: 2px;
     }
   }
 `
@@ -127,10 +130,11 @@ const StyledServicesLink = styled.div`
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     padding: 0 40px;
     top: -20px;
-  }
 
-  a {
-    margin: 0;
+    a {
+      margin: 0;
+      font-size: 18px;
+    }
   }
 `
 
@@ -144,7 +148,7 @@ const Services = ({ content }) => {
     <StyledSection id="services">
       <StyledContentWrapper>
         <motion.div style={{ x: moveRight }}>
-          <h3 className="section-title">Look what I can do for you</h3>
+          <h3 className="section-title">Look what I built recently</h3>
         </motion.div>
         <div className="services">
           {services.map((service) => {
@@ -153,7 +157,7 @@ const Services = ({ content }) => {
               <StyledServices key={frontmatter.id}>
                 <Img
                   className="screenshot"
-                  fluid={frontmatter.screenshot.childImageSharp.fluid}
+                  fluid={frontmatter.laptop.childImageSharp.fluid}
                 />
                 <div className="category">{frontmatter.category}</div>
               </StyledServices>
@@ -162,7 +166,7 @@ const Services = ({ content }) => {
         </div>
       </StyledContentWrapper>
       <StyledServicesLink>
-        <StyledLink to="/projects">More about my Projects...</StyledLink>
+        <StyledLink to="/projects">My Projects in Detail...</StyledLink>
       </StyledServicesLink>
     </StyledSection>
   )

@@ -9,7 +9,7 @@ import GlobalStyle from "../styles/globalStyle"
 import Header from "./header"
 import DarkToggle from "./darkToggle"
 import Footer from "./footer"
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 
 if (typeof window !== "undefined") {
   require("smooth-scroll")('a[href*="#"]')
@@ -47,19 +47,21 @@ const Layout = ({ children }) => {
   }
 
   return (
-    <StyledLayoutWrapper>
-      <ThemeProvider theme={themeMode}>
-        <GlobalStyle />
-        <motion.section initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-          {isFirstLoaded && <InitialTransition />}
-          <Header />
-          <DarkToggle toggleTheme={toggleTheme} theme={theme} />
-          <main id="main-content">{children}</main>
-          <Footer />
-        </motion.section>
-      </ThemeProvider>
-    </StyledLayoutWrapper>
+    <AnimatePresence exitBeforeEnter>
+      <StyledLayoutWrapper>
+        <ThemeProvider theme={themeMode}>
+          <GlobalStyle />
+          <motion.section initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            {isFirstLoaded && <InitialTransition />}
+            <Header />
+            <DarkToggle toggleTheme={toggleTheme} theme={theme} />
+            <main id="main-content">{children}</main>
+            <Footer />
+          </motion.section>
+        </ThemeProvider>
+      </StyledLayoutWrapper>
+    </AnimatePresence>
   )
 }
 

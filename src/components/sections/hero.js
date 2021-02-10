@@ -80,7 +80,7 @@ const StyledContentWrapper = styled(ContentWrapper)`
       }
 
       img {
-        filter: grayscale(80%) contrast(0.9) brightness(90%);
+        filter: grayscale(40%) contrast(0.9) brightness(100%);
       }
     }
 `
@@ -90,13 +90,18 @@ const StyledAboutLink = styled.div`
   justify-content: flex-end;
   padding: 100px 40px 0 40px;
 
+
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
         padding: 0 40px;
+
+        a {
+    margin: 0;
+    font-size: 18px;
+  }
       }
 
-  a {
-    margin: 0;
-  }
+      
+
 `
 
 

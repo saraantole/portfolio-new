@@ -34,10 +34,10 @@ const StyledContentWrapper = styled(ContentWrapper)`
     flex-direction: column;
     justify-content: center;
     padding: 0;
+    overflow-x: hidden;
     .section-title {
       font-size: 72px;
       font-weight: 600;
-      line-height: 80px;
       padding: 40px;
       margin-left: 120px;
     }
@@ -45,13 +45,12 @@ const StyledContentWrapper = styled(ContentWrapper)`
       display: flex;
       height: auto;
       flex-direction: column;
-      overflow-x: hidden;
     }
     @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
       .section-title {
-        font-size: 24px;
-        line-height: 30px;
-        margin: 0;
+        font-size: 36px;
+        padding: 0;
+        margin-left: 70px;
       }
     }
   }
@@ -119,7 +118,7 @@ const StyledProject = styled(motion.div)`
     width: 50%;
     padding: 60px 85px 85px 85px;
     position: relative;
-    top: -220px;
+    top: -180px;
     left: 25%;
 
     .features {
@@ -140,10 +139,10 @@ const StyledProject = styled(motion.div)`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     .project-details {
-      width: 80%;
-      left: 10%;
-      top: -140px;
-      padding: 30px 45px 45px 45px;
+      width: 90%;
+      left: 5%;
+      top: -100px;
+      padding: 30px 40px 45px 40px;
     }
 
     .title {
@@ -182,7 +181,7 @@ const Projects = ({ content }) => {
     <StyledSection id="projects">
       <StyledContentWrapper>
         <motion.div style={{ x: moveRight }}>
-          <h3 className="section-title">Look what I have built recently</h3>
+          <h3 className="section-title">Latest projects</h3>
         </motion.div>
         <div className="projects">
           {projects.map((project) => {

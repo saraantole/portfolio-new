@@ -34,6 +34,11 @@ const StyledContactLink = styled(Link)`
       font-size: 18px;
       margin: 5px;
     }
+
+    &:hover {
+      letter-spacing: normal;
+      transition: none;
+    }
   }
 `
 

@@ -90,7 +90,7 @@ export const pageQuery = graphql`
           frontmatter {
             category
             id
-            screenshot {
+            laptop {
               childImageSharp {
                 fluid(maxWidth: 1600, quality: 90) {
                   ...GatsbyImageSharpFluid

@@ -21,6 +21,7 @@ const StyledContentWrapper = styled(ContentWrapper)`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding-top: 15px;
     align-items: center;
     .footer-links {
       display: flex;
