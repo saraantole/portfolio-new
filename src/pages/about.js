@@ -30,6 +30,7 @@ const StyledSection = styled.section`
   h2 {
     font-size: 40px;
     font-weight: 600;
+    padding: 30px 0 5px 0;
   }
 
   p{

@@ -26,8 +26,10 @@ const StyledContentWrapper = styled(ContentWrapper)`
       display: flex;
       padding-bottom: 20px;
       @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-        width: auto;
-        padding: 20px 40px 0 40px;
+        width: 100%;
+        padding-bottom: 20px;
+        justify-content: center;
+        align-items: center;
       }
 
       a,
@@ -54,9 +56,7 @@ const Footer = () => {
       <StyledContentWrapper>
         <Social width="9rem" padding="0.5rem 1.25rem" />
         <div className="footer-links">
-          <p>
-            Crafted by <span>{author}</span>
-          </p>
+          <p>{author}</p>
           <p> | © {new Date().getFullYear()}</p>
           <Link to="/privacy" darkMode={darkMode}>
             | Privacy

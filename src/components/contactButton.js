@@ -9,7 +9,7 @@ const StyledContactLink = styled(Link)`
   width: 100%;
   transition: 0.3s ease-out;
   padding: 70px 40px;
-  margin: 50px 0; 
+  margin: 50px 0;
 
   h3 {
     font-size: 120px;

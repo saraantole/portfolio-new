@@ -36,6 +36,11 @@ const StyledNav = styled.nav`
       width: 100%;
     }
   }
+
+  .current {
+    text-decoration: underline;
+  }
+
   .cta-btn {
     width: auto;
     height: auto;
@@ -81,7 +86,7 @@ const Navbar = () => {
     <StyledNav>
       {menu.map(({ name, url }, key) => {
         return (
-          <StyledLink key={key} to={url}>
+          <StyledLink key={key} to={url} activeClassName="current">
             {name}
           </StyledLink>
         )

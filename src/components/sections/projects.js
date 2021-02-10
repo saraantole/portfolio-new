@@ -15,13 +15,6 @@ const StyledSection = styled.section`
   height: auto;
   background: ${({ theme }) => theme.colors.background};
 
-  p {
-    font-weight: 600;
-    font-size: 22px;
-    line-height: 30px;
-    letter-spacing: 1px;
-  }
-
   .cta-btn {
     display: block;
     text-align: center;
@@ -44,6 +37,7 @@ const StyledContentWrapper = styled(ContentWrapper)`
     .section-title {
       font-size: 72px;
       font-weight: 600;
+      line-height: 80px;
       padding: 40px;
       margin-left: 120px;
     }
@@ -109,7 +103,14 @@ const StyledProject = styled(motion.div)`
 
   .screenshot {
     width: 100vw;
-    height: 500px;
+    height: 450px;
+  }
+
+  p {
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 36px;
+    letter-spacing: 1px;
   }
 
   .project-details {
@@ -118,7 +119,7 @@ const StyledProject = styled(motion.div)`
     width: 50%;
     padding: 60px 85px 85px 85px;
     position: relative;
-    top: -150px;
+    top: -220px;
     left: 25%;
 
     .features {
@@ -141,6 +142,7 @@ const StyledProject = styled(motion.div)`
     .project-details {
       width: 80%;
       left: 10%;
+      top: -140px;
       padding: 30px 45px 45px 45px;
     }
 
@@ -152,6 +154,18 @@ const StyledProject = styled(motion.div)`
     .category {
       font-size: 22px;
       line-height: 40px;
+    }
+
+    .screenshot {
+      width: 100vw;
+      height: 250px;
+    }
+
+    p {
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 28px;
+      letter-spacing: 1px;
     }
   }
 `
@@ -183,7 +197,7 @@ const Projects = ({ content }) => {
                     fluid={frontmatter.screenshot.childImageSharp.fluid}
                   />
                   <div className="project-details">
-                  <div className="links">
+                    <div className="links">
                       {frontmatter.github && (
                         <a
                           href={frontmatter.github}

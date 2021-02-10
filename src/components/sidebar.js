@@ -59,6 +59,11 @@ const StyledNav = styled.nav`
     text-align: center;
     padding: 1.5rem 0;
   }
+
+  .current {
+    text-decoration: underline;
+  }
+
   .cta-btn {
     width: auto;
     height: auto;
@@ -84,6 +89,7 @@ const Sidebar = ({ open, setOpen }) => {
               key={key}
               to={url}
               onClick={() => setOpen(!open)}
+              activeClassName="current"
             >
               {name}
             </Link>

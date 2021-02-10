@@ -2,7 +2,6 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { graphql } from "gatsby"
-
 import GlobalStateProvider from "../context/provider"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -10,6 +9,7 @@ import Hero from "../components/sections/hero"
 import Services from "../components/sections/services"
 import ContactButton from "../components/contactButton"
 import { seoTitleSuffix } from "../../config"
+
 
 const IndexPage = ({ data }) => {
   const { frontmatter } = data.index.edges[0].node
@@ -33,9 +33,9 @@ const IndexPage = ({ data }) => {
               : `${seoTitle}`
           }
         />
-        <Hero content={data.hero.edges} />
-        <Services content={data.projects.edges} />
-        <ContactButton/>
+          <Hero content={data.hero.edges} />
+          <Services content={data.projects.edges} />
+          <ContactButton />
       </Layout>
     </GlobalStateProvider>
   )
@@ -103,3 +103,5 @@ export const pageQuery = graphql`
     }
   }
 `
+
+

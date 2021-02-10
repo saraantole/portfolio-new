@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React from "react"
+import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import styled, { ThemeProvider } from "styled-components"
 import "@fontsource/manrope"
@@ -9,8 +9,8 @@ import GlobalStyle from "../styles/globalStyle"
 import Header from "./header"
 import DarkToggle from "./darkToggle"
 import Footer from "./footer"
+import { motion } from 'framer-motion'
 
-// https://medium.com/@chrisfitkin/how-to-smooth-scroll-links-in-gatsby-3dc445299558
 if (typeof window !== "undefined") {
   require("smooth-scroll")('a[href*="#"]')
 }
@@ -26,25 +26,139 @@ const Layout = ({ children }) => {
   const [theme, toggleTheme, componentMounted] = useDarkMode()
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
+  const [isFirstLoaded, setFirstLoaded] = useState(true)
+
+  useEffect(() => {
+    if (!sessionStorage.getItem("splash")) {
+      setTimeout(() => {
+        setFirstLoaded(false)
+        sessionStorage.setItem('splash', true)
+      }, 5000)
+    } else {
+      setFirstLoaded(false)
+    }
+    window.onunload = () => sessionStorage.removeItem('splash')
+    return
+  }, [isFirstLoaded])
+
+
   if (!componentMounted) {
     return <div />
   }
 
   return (
-      <StyledLayoutWrapper>
-        <ThemeProvider theme={themeMode}>
-          <GlobalStyle />
+    <StyledLayoutWrapper>
+      <ThemeProvider theme={themeMode}>
+        <GlobalStyle />
+        <motion.section initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+          {isFirstLoaded && <InitialTransition />}
           <Header />
           <DarkToggle toggleTheme={toggleTheme} theme={theme} />
           <main id="main-content">{children}</main>
           <Footer />
-        </ThemeProvider>
-      </StyledLayoutWrapper>
+        </motion.section>
+      </ThemeProvider>
+    </StyledLayoutWrapper>
   )
 }
+
 
 Layout.propTypes = {
   children: PropTypes.any,
 }
 
 export default Layout
+
+const blackBox = {
+  initial: {
+    height: "100%",
+    bottom: 0,
+  },
+  animate: {
+    height: 0,
+    transition: {
+      when: "afterChildren",
+      duration: 1.5,
+      ease: [0.87, 0, 0.13, 1],
+    },
+  },
+};
+
+const textContainer = {
+  initial: {
+    opacity: 1,
+  },
+  animate: {
+    opacity: 0,
+    transition: {
+      duration: 0.3,
+      when: "afterChildren",
+    },
+  },
+};
+
+const text = {
+  initial: {
+    y: 40,
+  },
+  animate: {
+    y: 80,
+    transition: {
+      duration: 1.5,
+      ease: [0.87, 0, 0.13, 1],
+    },
+  },
+};
+
+const InitialTransition = () => {
+  // Scroll user to top to avoid showing the footer
+  React.useState(() => {
+    typeof windows !== "undefined" && window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <motion.div
+      style={{
+        position: 'absolute',
+        zIndex: '50',
+        display: 'flex',
+        justifyContent: 'center',
+        width: '100vw',
+        backgroundColor: 'black',
+        alignItems: 'center'
+      }}
+      initial="initial"
+      animate="animate"
+      variants={blackBox}
+      onAnimationStart={() => document.body.style.overflow = 'hidden'}
+      onAnimationComplete={() =>
+        document.body.style.overflowY = 'auto'
+      }
+    >
+      <motion.svg variants={textContainer} style={{ position: 'absolute', zIndex: '50', display: 'flex' }}>
+        <pattern
+          id="pattern"
+          patternUnits="userSpaceOnUse"
+          width={750}
+          height={800}
+          style={{ color: 'white' }}
+        >
+          <rect style={{ width: '100%', height: '100%', fill: 'currentcolor' }} />
+          <motion.rect
+            variants={text}
+            style={{ width: '100%', height: '100%', color: 'grey', fill: 'currentcolor' }}
+          />
+        </pattern>
+        <text
+          textAnchor="middle"
+          x="50%"
+          y="50%"
+          style={{ fill: "url(#pattern)", fontSize: '32px', fontWeight: '600', letterSpacing: '3px' }}
+        >
+          SA
+        </text>
+      </motion.svg>
+    </motion.div>
+  );
+};
