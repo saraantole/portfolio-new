@@ -6,7 +6,7 @@ import { navLinks } from "../../config"
 
 const StyledNav = styled.nav`
   display: none;
-  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -21,7 +21,7 @@ const StyledNav = styled.nav`
     font-weight: 400;
     text-align: center;
     position: relative;
-    margin: 0 0 0 1.25rem;
+    margin-left: 1.25rem;
     padding: 0;
     &::before {
       transition: 200ms ease-out;
@@ -51,7 +51,7 @@ const StyledNav = styled.nav`
     transition: 20ms ease-out;
     font-size: 24px;
     padding: 0.5rem 1.5rem;
-    margin: 0;
+    margin-left: 1.25rem;
     &:hover {
       background: ${({ theme }) => theme.colors.primary};
       color: ${({ theme }) => theme.colors.background};

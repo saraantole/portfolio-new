@@ -74,8 +74,6 @@ export const pageQuery = graphql`
                 }
               }
             }
-            position
-            buttonVisible
             buttonUrl
             buttonText
           }

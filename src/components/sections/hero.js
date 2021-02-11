@@ -159,7 +159,7 @@ const Hero = ({ content }) => {
         </h3>
       </StyledContentWrapper>
       <StyledAboutLink>
-        <StyledLink to='/about'>More About Me...</StyledLink>
+        <StyledLink to='/about'>&#8594; More About Me</StyledLink>
       </StyledAboutLink>
     </StyledSection>
   )

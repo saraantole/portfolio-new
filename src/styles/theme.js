@@ -7,7 +7,7 @@ export const sharedPreferences = {
     xs: "480px",
     sm: "768px",
     md: "992px",
-    lg: "1200px",
+    lg: "1024px",
   },
   borderRadius: "0",
   pageWidth: "100%",

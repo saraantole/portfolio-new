@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react"
 import styled from "styled-components"
 import { motion } from "framer-motion"
 
-import { useOnScreen } from "../../hooks"
 import Button from "../../styles/button"
 import ContentWrapper from "../../styles/contentWrapper"
 
@@ -14,9 +13,9 @@ const StyledSection = styled(motion.section)`
 
 const StyledContentWrapper = styled(ContentWrapper)`
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: flex-start;
-  padding: 100px;
+  padding: 100px 80px 20px 80px;
 
   h2 {
     font-weight: 700;
@@ -100,14 +99,6 @@ const StyledContentWrapper = styled(ContentWrapper)`
 `
 
 const Contact = () => {
-  // Required for animation
-  const ref = useRef()
-  //const onScreen = useOnScreen(ref)
-  const variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  }
-
   const [status, setStatus] = useState("")
 
   const submitForm = (ev) => {
@@ -129,12 +120,7 @@ const Contact = () => {
     xhr.send(data)
   }
   return (
-    <StyledSection
-      id="contact"
-      ref={ref}
-      variants={variants}
-      //animate={onScreen ? "visible" : "hidden"}
-    >
+    <StyledSection>
       <StyledContentWrapper>
         <h2>Let&apos;s build something beautiful!</h2>
         <form

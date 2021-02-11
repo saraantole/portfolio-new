@@ -135,7 +135,7 @@ const InitialTransition = () => {
       variants={blackBox}
       onAnimationStart={() => document.body.style.overflow = 'hidden'}
       onAnimationComplete={() =>
-        document.body.style.overflowY = 'auto'
+        document.body.style.overflowY = 'visible'
       }
     >
       <motion.svg variants={textContainer} style={{ position: 'absolute', zIndex: '50', display: 'flex' }}>

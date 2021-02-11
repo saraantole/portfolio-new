@@ -56,7 +56,7 @@ const StyledServices = styled(motion.div)`
   }
 
   :hover .category {
-    transform: scale(1.3);
+    transform: scale(1.2);
     transition: 0.4s ease;
   }
 
@@ -65,7 +65,7 @@ const StyledServices = styled(motion.div)`
     width: 600px;
     height: 550px;
     transition: 0.4s ease;
-    left: -200px;
+    left: -20%;
     box-shadow: 0 0 2.5rem rgba(0, 0, 0, 0.16);
 
     img {
@@ -78,13 +78,13 @@ const StyledServices = styled(motion.div)`
     padding-left: 40px;
     font-size: 74px;
     line-height: 80px;
-    letter-spacing: 4px;
+    letter-spacing: 3px;
     margin-bottom: 20px;
     font-weight: 700;
-    padding: 0 40px;
+    padding: 0;
     top: -300px;
-    left: 320px;
-    width: 50%;
+    left: 12%;
+    width: 30%;
     transition: 0.4s ease;
   }
 
@@ -124,7 +124,7 @@ const StyledServicesLink = styled.div`
   display: flex;
   justify-content: flex-end;
   position: relative;
-  top: -100px;
+  top: -40px;
   padding: 0 40px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
@@ -166,7 +166,7 @@ const Services = ({ content }) => {
         </div>
       </StyledContentWrapper>
       <StyledServicesLink>
-        <StyledLink to="/projects">My Projects in Detail...</StyledLink>
+        <StyledLink to="/projects">&#8594; My Projects in Detail</StyledLink>
       </StyledServicesLink>
     </StyledSection>
   )

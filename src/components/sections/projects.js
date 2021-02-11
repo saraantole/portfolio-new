@@ -6,7 +6,6 @@ import Img from "gatsby-image"
 import { motion, useViewportScroll, useTransform } from "framer-motion"
 import Context from "../../context"
 import ContentWrapper from "../../styles/contentWrapper"
-import Button from "../../styles/button"
 import Icon from "../../components/icons"
 import { lightTheme, darkTheme } from "../../styles/theme"
 
@@ -14,13 +13,43 @@ const StyledSection = styled.section`
   width: 100%;
   height: auto;
   background: ${({ theme }) => theme.colors.background};
+`
 
-  .cta-btn {
-    display: block;
+const StyledGithubLink = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  padding: 0 40px;
+  top: -100px;
+
+  a {
+    font-size: 24px;
+    font-weight: 400;
     text-align: center;
-    margin-top: -100px;
-    @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-      margin: 0 auto;
+    position: relative;
+    margin: 0 0 0 1.25rem;
+    padding: 0;
+    &::before {
+      transition: 200ms ease-out;
+      height: 0.1563rem;
+      content: "";
+      position: absolute;
+      background-color: ${({ theme }) => theme.colors.primary};
+      width: 0%;
+      bottom: -0.125rem;
+    }
+    &:hover::before {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: 0 40px;
+    top: -50px;
+
+    a {
+      margin: 0;
+      font-size: 18px;
     }
   }
 `
@@ -112,14 +141,18 @@ const StyledProject = styled(motion.div)`
     letter-spacing: 1px;
   }
 
+  .details {
+    display: flex;
+    justify-content: center;
+  }
+
   .project-details {
     background-color: ${({ theme }) => theme.colors.card};
     box-shadow: 0 0 2.5rem rgba(0, 0, 0, 0.16);
-    width: 50%;
+    width: 70%;
     padding: 60px 85px 85px 85px;
     position: relative;
     top: -180px;
-    left: 25%;
 
     .features {
       display: flex;
@@ -140,7 +173,6 @@ const StyledProject = styled(motion.div)`
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     .project-details {
       width: 90%;
-      left: 5%;
       top: -100px;
       padding: 30px 40px 45px 40px;
     }
@@ -188,13 +220,13 @@ const Projects = ({ content }) => {
             const { body, frontmatter } = project.node
             return (
               <StyledProject key={frontmatter.id}>
+                <div className="title">{frontmatter.title}</div>
+                <div className="category">{frontmatter.category}</div>
+                <Img
+                  className="screenshot"
+                  fluid={frontmatter.screenshot.childImageSharp.fluid}
+                />
                 <div className="details">
-                  <div className="title">{frontmatter.title}</div>
-                  <div className="category">{frontmatter.category}</div>
-                  <Img
-                    className="screenshot"
-                    fluid={frontmatter.screenshot.childImageSharp.fluid}
-                  />
                   <div className="project-details">
                     <div className="links">
                       {frontmatter.github && (
@@ -249,19 +281,16 @@ const Projects = ({ content }) => {
           })}
         </div>
       </StyledContentWrapper>
-      {sectionDetails.frontmatter.buttonVisible && (
-        <motion.a
-          className="cta-btn"
+      <StyledGithubLink>
+        <a
           href={sectionDetails.frontmatter.buttonUrl}
           target="_blank"
           rel="nofollow noopener noreferrer"
           aria-label="External Link"
         >
-          <Button type="button" textAlign="center" center>
-            {sectionDetails.frontmatter.buttonText}
-          </Button>
-        </motion.a>
-      )}
+          {sectionDetails.frontmatter.buttonText}
+        </a>
+      </StyledGithubLink>
     </StyledSection>
   )
 }

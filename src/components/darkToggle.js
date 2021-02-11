@@ -7,7 +7,7 @@ const StyledDarkToggle = styled.div`
   align-items: center;
   position: absolute;
   top: 32px;
-  left: 40vw;
+  left: 42%;
   z-index: 10;
 `
 
