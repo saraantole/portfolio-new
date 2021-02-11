@@ -31,12 +31,15 @@ const Layout = ({ children }) => {
   useEffect(() => {
     if (!sessionStorage.getItem("splash")) {
       setTimeout(() => {
-        setFirstLoaded(false)
         sessionStorage.setItem('splash', true)
+        setFirstLoaded(false)
       }, 5000)
-    } else {
+    }
+
+    if (sessionStorage.getItem("splash")) {
       setFirstLoaded(false)
     }
+    
     window.onunload = () => sessionStorage.removeItem('splash')
     return
   }, [isFirstLoaded])
@@ -51,8 +54,8 @@ const Layout = ({ children }) => {
       <StyledLayoutWrapper>
         <ThemeProvider theme={themeMode}>
           <GlobalStyle />
-          <motion.section initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+          <motion.section initial={{ opacity: 0 }} transition={{ duration: 1 }}
+            animate={{ opacity: 1}} exit={{ opacity: 0 }}>
             {isFirstLoaded && <InitialTransition />}
             <Header />
             <DarkToggle toggleTheme={toggleTheme} theme={theme} />
