@@ -27,7 +27,6 @@ const SEO = ({ description, lang, meta, title }) => {
       htmlAttributes={{
         lang,
       }}
-      style={{ backgroundColor: "black" }}
       title={title}
       titleTemplate={`%s`}
       meta={[
@@ -80,7 +79,12 @@ const SEO = ({ description, lang, meta, title }) => {
           content: lightTheme.colors.primary,
         },
       ].concat(meta)}
-    />
+    >
+      <style type="text/css">{`html {
+        background-color: green;
+      }
+    `}</style>
+    </Helmet>
   )
 }
 
