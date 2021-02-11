@@ -57,14 +57,14 @@ const StyledServices = styled(motion.div)`
 
   :hover .category {
     transform: scale(1.2);
-    transition: 0.4s ease;
+    transition: 0.4s ease-in;
   }
 
   .screenshot {
     position: relative;
     width: 600px;
     height: 550px;
-    transition: 0.4s ease;
+    transition: 0.4s ease-in;
     left: -20%;
     box-shadow: 0 0 2.5rem rgba(0, 0, 0, 0.16);
 

@@ -52,7 +52,7 @@ const Layout = ({ children }) => {
 
   return (
     <AnimatePresence exitBeforeEnter>
-      <StyledLayoutWrapper style={{ background: 'grey' }}>
+      <StyledLayoutWrapper>
         <ThemeProvider theme={themeMode}>
           <GlobalStyle />
           <motion.section initial={{ opacity: 0 }} transition={{ duration: 1 }}
