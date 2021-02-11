@@ -21,6 +21,7 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         overflow-x: hidden;
+        background-color: ${({ theme }) => theme.colors.background};
         color: ${({ theme }) => theme.colors.text};
         font-size: 1rem;
         font-family: ${({ theme }) => theme.fonts.primary};
