@@ -27,6 +27,7 @@ const SEO = ({ description, lang, meta, title }) => {
       htmlAttributes={{
         lang,
       }}
+      style={{ backgroundColor: "black" }}
       title={title}
       titleTemplate={`%s`}
       meta={[
