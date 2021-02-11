@@ -64,7 +64,6 @@ const StyledContentWrapper = styled(ContentWrapper)`
       width: 100%;
       height: auto;
       position: relative;
-      background: red;
       top: -120px;
       left: 120px;
       max-width: 500px;
