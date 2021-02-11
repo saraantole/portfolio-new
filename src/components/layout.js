@@ -33,7 +33,7 @@ const Layout = ({ children }) => {
       setTimeout(() => {
         sessionStorage.setItem('splash', true)
         setFirstLoaded(false)
-      }, 3900)
+      }, 4000)
     }
 
     if (sessionStorage.getItem("splash")) {
@@ -54,7 +54,7 @@ const Layout = ({ children }) => {
       <StyledLayoutWrapper>
         <ThemeProvider theme={themeMode}>
           <GlobalStyle />
-          <motion.section initial={{ opacity: 0 }} transition={{ duration: 1 }}
+          <motion.section initial={{ opacity: 0 }} transition={{ duration: 1}}
             animate={{ opacity: 1}} exit={{ opacity: 0 }}>
             {isFirstLoaded && <InitialTransition />}
             <Header />

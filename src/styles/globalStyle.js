@@ -13,7 +13,6 @@ const GlobalStyle = createGlobalStyle`
 
     html {
         width: 100%;
-        background-color: ${({ theme }) => theme.colors.background};
     }
 
     body {
