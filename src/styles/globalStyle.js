@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { createGlobalStyle } from "styled-components"
 import modernNormalize from "styled-modern-normalize"
 
@@ -20,7 +19,7 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         overflow-x: hidden;
-        background-color: ${({ theme }) => theme.colors.background};
+        background-color: ${({ theme }) => theme.colors.background}!important;
         color: ${({ theme }) => theme.colors.text};
         font-size: 1rem;
         font-family: ${({ theme }) => theme.fonts.primary};
@@ -113,7 +112,6 @@ const GlobalStyle = createGlobalStyle`
         border-radius: 15px;
         box-shadow: inset 7px 10px 12px #f0f0f0;
        }
-
 `
 
 export default GlobalStyle
