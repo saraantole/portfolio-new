@@ -19,10 +19,10 @@ const StyledContentWrapper = styled(ContentWrapper)`
     width: 100%;
     height: auto;
     overflow: hidden;
-    margin-top: 100px;
+    padding-top: 100px;
     margin-bottom: -400px;
     @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-      margin-top: 80px;
+      padding-top: 80px;
       margin-bottom: -150px;
       }
 

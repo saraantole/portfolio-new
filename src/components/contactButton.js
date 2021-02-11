@@ -5,11 +5,11 @@ import { Link } from "gatsby"
 const StyledContactLink = styled(Link)`
   font-weight: 700;
   color: ${({ theme, color }) => theme.colors[color] || color};
+  background-color: ${({ theme }) => theme.colors.background};
   text-align: center;
   width: 100%;
   transition: 0.3s ease-out;
-  padding: 70px 40px;
-  margin: 50px 0;
+  padding: 150px 40px;
 
   h3 {
     font-size: 120px;

@@ -26,6 +26,9 @@ const StyledSection = styled.section`
     font-weight: 600;
     margin-left: 120px;
     padding: 40px;
+    margin-bottom: 0;
+    padding-top: 100px;
+    margin-top: 0;
   }
   h2 {
     font-size: 40px;
@@ -42,6 +45,7 @@ const StyledSection = styled.section`
       h1 {
         font-size: 36px;
         margin: 0;
+        padding-right: 0;
       }
 
       h2 {

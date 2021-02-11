@@ -13,13 +13,14 @@ import { seoTitleSuffix } from "../../config"
 
 const StyledSection = styled.section`
   width: 100%;
-  max-width: 62.5rem;
-  margin: 0 auto;
   padding: 0 2.5rem;
   height: auto;
   background: ${({ theme }) => theme.colors.background};
   h1 {
     font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 0;
+    padding-top: 30px;
   }
   h2 {
     font-size: 1.25rem;
@@ -27,6 +28,11 @@ const StyledSection = styled.section`
   h3 {
     font-size: 1rem;
     margin-bottom: 1rem;
+  }
+
+  p {
+    margin-bottom: 0;
+    padding-bottom: 30px;
   }
 `
 

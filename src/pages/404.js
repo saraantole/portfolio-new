@@ -37,8 +37,7 @@ const StyledSection = styled.section`
 const StyledContentWrapper = styled(ContentWrapper)`
   && {
     width: 100%;
-    margin: 50px 0;
-    padding: 0;
+    padding: 50px 0;
     height: 100%;
     text-align: center;
   }
