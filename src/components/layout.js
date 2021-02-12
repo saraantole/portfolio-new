@@ -56,16 +56,16 @@ const Layout = ({ children }) => {
         <ThemeProvider theme={themeMode}>
           <GlobalStyle />
           <motion.section initial={{ opacity: 0 }} transition={{ duration: 1 }}
-            animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            animate={{ opacity: 1 }} exit={{ opacity: 0 }} onLoad={() => document.getElementsByTagName('html')[0].style.background = 'violet'}>
             {isFirstLoaded && <InitialTransition />}
-            <Header />
-            <DarkToggle toggleTheme={toggleTheme} theme={theme} />
-            <main id="main-content">{children}</main>
-            <Footer />
+          <Header />
+          <DarkToggle toggleTheme={toggleTheme} theme={theme} />
+          <main id="main-content">{children}</main>
+          <Footer />
           </motion.section>
         </ThemeProvider>
       </StyledLayoutWrapper>
-    </AnimatePresence>
+    </AnimatePresence >
   )
 }
 
