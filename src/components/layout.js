@@ -26,14 +26,11 @@ const Layout = ({ children }) => {
   const [theme, toggleTheme, componentMounted] = useDarkMode()
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
-  console.log(themeMode)
-  window.onload = () => document.getElementsByTagName('html')[0].style.backgroundColor = 'pink';
+  //window.onload = () => document.getElementsByTagName('html')[0].style.backgroundColor = 'pink';
   const [isFirstLoaded, setFirstLoaded] = useState(true)
 
   useEffect(() => {
-    console.log(themeMode)
-    window.onload = () => document.getElementsByTagName('html')[0].style.backgroundColor = 'pink';
-    
+
     if (!sessionStorage.getItem("splash")) {
       setTimeout(() => {
         sessionStorage.setItem('splash', true)
@@ -61,9 +58,7 @@ const Layout = ({ children }) => {
           <GlobalStyle />
           <motion.section initial={{ opacity: 0 }} transition={{ duration: 1 }}
             animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-          //onLoad={(themeMode) => 
-          //document.getElementsByTagName('html')[0].style.backgroundColor = 'pink';
-          >
+            onLoad={() => document.getElementsByTagName('html')[0].style.background = themeMode.colors.background} >
             {isFirstLoaded && <InitialTransition />}
             <Header />
             <DarkToggle toggleTheme={toggleTheme} theme={theme} />
