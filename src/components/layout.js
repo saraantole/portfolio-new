@@ -26,6 +26,8 @@ const Layout = ({ children }) => {
   const [theme, toggleTheme, componentMounted] = useDarkMode()
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
+  //console.log(themeMode)
+  window.onload = () => document.getElementsByTagName('html')[0].style.backgroundColor = 'pink';
   const [isFirstLoaded, setFirstLoaded] = useState(true)
 
   useEffect(() => {
@@ -56,7 +58,10 @@ const Layout = ({ children }) => {
         <ThemeProvider theme={themeMode}>
           <GlobalStyle />
           <motion.section initial={{ opacity: 0 }} transition={{ duration: 1 }}
-            animate={{ opacity: 1 }} exit={{ opacity: 0 }} onLoad={() => document.getElementsByTagName('html')[0].style.background = 'violet'}>
+            animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            //onLoad={(themeMode) => 
+              //document.getElementsByTagName('html')[0].style.backgroundColor = 'pink';
+              >
             {isFirstLoaded && <InitialTransition />}
           <Header />
           <DarkToggle toggleTheme={toggleTheme} theme={theme} />
