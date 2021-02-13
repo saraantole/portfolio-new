@@ -75,7 +75,9 @@ const StyledContentWrapper = styled(ContentWrapper)`
     transition: all 350ms ease;
     font-size: 18px;
 
-    :focus {
+    :focus,
+    :hover,
+    :valid {
       outline: none;
       background: white;
     }
