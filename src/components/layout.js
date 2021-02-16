@@ -34,6 +34,7 @@ const Layout = ({ children }) => {
     if (!sessionStorage.getItem("splash")) {
       setTimeout(() => {
         sessionStorage.setItem('splash', true)
+        document.getElementsByTagName('html')[0].style.overflowY = 'auto'
         setFirstLoaded(false)
       }, 3800)
     }
