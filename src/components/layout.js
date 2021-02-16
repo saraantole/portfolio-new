@@ -35,7 +35,7 @@ const Layout = ({ children }) => {
       setTimeout(() => {
         sessionStorage.setItem('splash', true)
         setFirstLoaded(false)
-      }, 4000)
+      }, 3800)
     }
 
     if (sessionStorage.getItem("splash")) {
