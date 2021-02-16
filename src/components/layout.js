@@ -67,7 +67,7 @@ const Layout = ({ children }) => {
           </motion.section>
         </ThemeProvider>
       </StyledLayoutWrapper>
-    </AnimatePresence >
+    </AnimatePresence>
   )
 }
 

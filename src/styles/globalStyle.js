@@ -13,6 +13,7 @@ const GlobalStyle = createGlobalStyle`
     html {
         width: 100%;
         height: 100%;
+        
     }
 
     body {
@@ -20,6 +21,7 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         overflow-x: hidden;
+        overflow-y: auto;
         color: ${({ theme }) => theme.colors.text};
         font-size: 1rem;
         font-family: ${({ theme }) => theme.fonts.primary};
