@@ -152,20 +152,20 @@ const Services = ({ content }) => {
           <h3 className="section-title">Look what I built recently</h3>
         </motion.div>
         <div className="services">
-          {services.map((service) => {
-            const { frontmatter } = service.node
-            return (
-              <StyledServices key={frontmatter.id}>
-                <Link to="projects">
+          <Link to="projects">
+            {services.map((service) => {
+              const { frontmatter } = service.node
+              return (
+                <StyledServices key={frontmatter.id}>
                   <Img
                     className="screenshot"
                     fluid={frontmatter.laptop.childImageSharp.fluid}
                   />
                   <div className="category">{frontmatter.category}</div>
-                </Link>
-              </StyledServices>
-            )
-          })}
+                </StyledServices>
+              )
+            })}
+          </Link>
         </div>
       </StyledContentWrapper>
       <StyledServicesLink>
