@@ -5,6 +5,7 @@ import Img from "gatsby-image"
 import { motion, useViewportScroll, useTransform } from "framer-motion"
 import ContentWrapper from "../../styles/contentWrapper"
 import { StyledLink } from "../navbar"
+import { Link } from "gatsby"
 
 const StyledSection = styled.section`
   width: 100%;
@@ -155,11 +156,13 @@ const Services = ({ content }) => {
             const { frontmatter } = service.node
             return (
               <StyledServices key={frontmatter.id}>
-                <Img
-                  className="screenshot"
-                  fluid={frontmatter.laptop.childImageSharp.fluid}
-                />
-                <div className="category">{frontmatter.category}</div>
+                <Link to="projects">
+                  <Img
+                    className="screenshot"
+                    fluid={frontmatter.laptop.childImageSharp.fluid}
+                  />
+                  <div className="category">{frontmatter.category}</div>
+                </Link>
               </StyledServices>
             )
           })}
