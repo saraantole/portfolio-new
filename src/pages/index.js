@@ -10,7 +10,6 @@ import Services from "../components/sections/services"
 import ContactButton from "../components/contactButton"
 import { seoTitleSuffix } from "../../config"
 
-
 const IndexPage = ({ data }) => {
   const { frontmatter } = data.index.edges[0].node
   const { seoTitle, useSeoTitleSuffix, useSplashScreen } = frontmatter
@@ -33,9 +32,9 @@ const IndexPage = ({ data }) => {
               : `${seoTitle}`
           }
         />
-          <Hero content={data.hero.edges} />
-          <Services content={data.projects.edges} />
-          <ContactButton />
+        <Hero content={data.hero.edges} />
+        <Services content={data.projects.edges} />
+        <ContactButton />
       </Layout>
     </GlobalStateProvider>
   )
@@ -83,7 +82,7 @@ export const pageQuery = graphql`
         fileAbsolutePath: { regex: "/projects/" }
         frontmatter: { visible: { eq: true } }
       }
-      sort: { fields: [frontmatter___position], order: ASC }
+      sort: { fields: frontmatter___id, order: DESC }
     ) {
       edges {
         node {
@@ -103,5 +102,3 @@ export const pageQuery = graphql`
     }
   }
 `
-
-

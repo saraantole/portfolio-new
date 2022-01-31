@@ -2,13 +2,12 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { graphql } from "gatsby"
-import Projects from '../components/sections/projects'
+import Projects from "../components/sections/projects"
 import GlobalStateProvider from "../context/provider"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import ContactButton from "../components/contactButton"
 import { seoTitleSuffix } from "../../config"
-
 
 const ProjectsPage = ({ data }) => {
   const { frontmatter } = data.projects.edges[0].node
@@ -52,7 +51,7 @@ export const pageQuery = graphql`
         fileAbsolutePath: { regex: "/projects/" }
         frontmatter: { visible: { eq: true } }
       }
-      sort: { fields: [frontmatter___position], order: ASC }
+      sort: { fields: frontmatter___id, order: DESC }
     ) {
       edges {
         node {

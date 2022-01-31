@@ -8,6 +8,8 @@ const GlobalStyle = createGlobalStyle`
 
     * {
         box-sizing: border-box;
+        user-select: none;
+        user-drag: none;
     }
 
     html {

@@ -1,8 +1,8 @@
 {
-  "name": "gatsby-starter-portfolio-minimal",
-  "description": "A clean, one-page portfolio using MDX",
+  "name": "Sara Antole",
+  "description": "Portfolio",
   "version": "1.0.0",
-  "author": "Konstantin Münster <mail@konstantin.digital>",
+  "author": "Sara Antole",
   "dependencies": {
     "@fontsource/manrope": "^4.1.0",
     "@mdx-js/mdx": "^1.6.22",

@@ -17,12 +17,11 @@ module.exports = {
     keywords: [
       "fullstack developer",
       "react developer",
-      "build a website",
-      "build ecommerce",
       "freelancer developer",
       "frontend developer",
       "develop web app",
-      "developer in spain",
+      "developer",
+      "blockchain developer",
     ],
   },
   plugins: [
